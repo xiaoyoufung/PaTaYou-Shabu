@@ -11,6 +11,7 @@ const PORT = 3200;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.set('view engine', 'ejs');
 
 app.get("/", async (req, res) => {
     const foods = await listFood.findAll();
@@ -20,7 +21,7 @@ app.get("/", async (req, res) => {
         console.log(foods);
     } catch(error){
         console.log(error);
-        res.status(500).send("Internal Server Error" + error);
+        res.json({ error: err });
     }
 });
 
