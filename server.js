@@ -3,11 +3,11 @@ const listFood = require("./model/listFood");
 
 const app = express();
 
-const PORT = 3500;
+const PORT = 3200;
 
 app.get("/", async (req, res) => {
     const foods = await listFood.findAll();
-    res.send("Hello World");
+    res.render("login");
 
     try{
         console.log(foods);
