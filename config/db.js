@@ -2,8 +2,8 @@ const mysql = require("mysql2");
 
 let config =  { host: "127.0.0.1",
 user: "root",
-password: "bp.CMU01",
-database: "backoffice"    
+password: "",
+database: "patayou"    
 };
 
 

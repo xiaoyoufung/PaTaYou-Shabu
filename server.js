@@ -1,11 +1,20 @@
 const express = require("express");
+const listFood = require("./model/listFood");
 
 const app = express();
 
 const PORT = 3500;
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+    const foods = await listFood.findAll();
     res.send("Hello World");
+
+    try{
+        console.log(foods);
+    } catch(error){
+        console.log(error);
+        res.status(500).send("Internal Server Error" + error);
+    }
 });
 
 app.listen(PORT, () => {
