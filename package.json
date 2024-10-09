@@ -1,0 +1,16 @@
+{
+  "name": "patayou-shabu",
+  "version": "1.0.0",
+  "description": "PaTaYou Shabu is a Shabu Buffet System that includes:   1) QR code scanning and food ordering for customers 2) POS system for the restaurant.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mysql2": "^3.11.3"
+  }
+}
