@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muffin Burger</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.product-card {
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.product-image {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    margin: 0;
+    font-size: 28px;
+}
+
+.product-price {
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.additional-info {
+    color: #888;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.quantity {
+    margin: 0 20px;
+    font-size: 20px;
+}
+
+.add-to-cart {
+    flex-grow: 1;
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 18px;
+}
+    </style>
+</head>
+<body>
+    <div class="product-card">
+        <button class="close-btn">×</button>
+        <img src="muffin-burger.jpg" alt="Muffin burger" class="product-image">
+        <div class="product-info">
+            <h2 class="product-name">Muffin burger</h2>
+            <p class="product-price">฿90.00</p>
+            <p class="additional-info">ข้อความเพิ่มเติม (ถ้ามี)</p>
+            <div class="quantity-control">
+                <button class="quantity-btn minus" onclick="updateQuantity(-1)">−</button>
+                <span id="quantity" class="quantity">1</span>
+                <button class="quantity-btn plus" onclick="updateQuantity(1)">+</button>
+                <button class="add-to-cart" onclick="addToCart()">เพิ่มลงตระกร้า ฿<span id="total-price">90</span></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let quantity = 1;
+const basePrice = 90;
+
+function updateQuantity(change) {
+    quantity = Math.max(1, quantity + change);
+    document.getElementById('quantity').textContent = quantity;
+    updateTotalPrice();
+}
+
+function updateTotalPrice() {
+    const totalPrice = basePrice * quantity;
+    document.getElementById('total-price').textContent = totalPrice;
+}
+
+function addToCart() {
+    alert(`Added ${quantity} Muffin burger(s) to cart. Total: ฿${basePrice * quantity}`);
+}
+    </script>
+</body>
+</html>

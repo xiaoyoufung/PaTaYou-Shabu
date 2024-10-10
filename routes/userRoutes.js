@@ -4,7 +4,6 @@ const listFood = require("../model/listFood");
 
 const app = express();
 
-
 router.get("/menu", async (req, res) => {
     const foods = await listFood.findAll();
     const foundedFoods = foods.filter((food) => food.food_image_url !== null);

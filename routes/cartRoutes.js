@@ -9,7 +9,7 @@ router.get("/", function (req, res, next) {
     }
     let cart = new Cart(req.session.cart);
     //console.log(cart)
-    res.render("frontend/shoppingcart", {
+    res.render("user/cart", {
       products: cart.generateArray(),
       totalPrice: cart.totalPrice,
     });

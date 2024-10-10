@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Wagyu UI with Comments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #8B0000;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .back-arrow {
+            margin-right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .user-icon {
+            margin-left: auto;
+            font-size: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .image-placeholder {
+            background-color: #f0f0f0;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+        .quantity button {
+            width: 30px;
+            height: 30px;
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .quantity span {
+            margin: 0 10px;
+        }
+        .description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .star {
+            color: #8B0000;
+            margin-right: 5px;
+        }
+        .calories {
+            margin-left: 10px;
+        }
+        .comments-section {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .comment {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .comment-author {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .comment-rating {
+            color: #8B0000;
+        }
+        .add-comment {
+            margin-top: 20px;
+        }
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .accept-button {
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/user/menu/"><span class="back-arrow">←</span></a>
+            <span class="user-icon"> 
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+        </div>
+        <div class="content">
+            <div class="image-placeholder">Picture
+                <img src="<%= food.food_image_url %>" alt="" srcset="">
+            </div>
+            <div class="title">
+                <h2><%= food.food_name %></h2>
+                <div class="quantity">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+            </div>
+        
+            <div class="rating">
+                <span class="star">★</span>
+                <span>4.8</span>
+                <span class="calories">1020 cal</span>
+            </div>
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <div class="comment">
+                    <div class="comment-author">Tawan</div>
+                    <p>The Australian Wagyu beef from Lee Pot is incredibly tender, with beautiful marbling, that makes this meat juicy. It has a rich, intense flavor and a perfectly grilled aroma. Ideal for those who appreciate high-quality beef.</p>
+                    <div class="comment-rating">★★★★★</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-author">Tawan</div>
+                    <p>The Australian Wagyu beef from Lee Pot is incredibly tender, with beautiful marbling, that makes this meat juicy. It has a rich, intense flavor and a perfectly grilled aroma. Ideal for those who appreciate high-quality beef.</p>
+                    <div class="comment-rating">★★★★★</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-author">Tawan</div>
+                    <p>The Australian Wagyu beef from Lee Pot is incredibly tender, with beautiful marbling, that makes this meat juicy. It has a rich, intense flavor and a perfectly grilled aroma. Ideal for those who appreciate high-quality beef.</p>
+                    <div class="comment-rating">★★★★★</div>
+                </div>
+            </div>
+        
+            <button class="accept-button" type="submit">
+                <span>accept</span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
