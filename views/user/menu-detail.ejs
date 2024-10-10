@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="/styles/menu.css">
 
     <style>
+
+.product-image {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    margin: 0;
+    font-size: 28px;
+}
+
+.product-price {
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 24px;
+}
         .close-btn {
     position: relative;
     top: 20px;
@@ -188,9 +212,10 @@
             <button class="close-btn">×</button>
         </a>
         <img src="muffin-burger.jpg" alt="Muffin burger" class="product-image">
-    
-        
-        <div class="bottom-nav">
+        <div class="product-info">
+            <h2 class="product-name">Muffin burger</h2>
+            <p class="product-price">฿90.00</p>
+            <p class="additional-info">ข้อความเพิ่มเติม (ถ้ามี)</p>
             <div class="quantity-control">
                 <button class="quantity-btn minus" onclick="updateQuantity(-1)">−</button>
                 <span id="quantity" class="quantity">1</span>
@@ -198,7 +223,6 @@
                 <button class="add-to-cart" onclick="addToCart()">เพิ่มลงตระกร้า ฿<span id="total-price">90</span></button>
             </div>
         </div>
-        
     </div>
 
  

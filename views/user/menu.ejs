@@ -35,7 +35,7 @@
         <div class="category-filters">
             <button class="filter-btn active-filter" onclick="showCategory('all')">All</button>
             <button class="filter-btn" onclick="showCategory('meat')">Meat</button>
-            <button class="filter-btn" onclick="showCategory('vegetable')">Vegetable</button>
+            <button class="filter-btn" onclick="showCategory('vegetable')">Rice & Noodle</button>
             <button class="filter-btn" onclick="showCategory('softserve')">Soft Serve</button>
         </div>
         
@@ -94,14 +94,16 @@
         </div>
 
         <div id="vegetable-section" class="section">
-            <h2 class="px-4 py-2 text-xl font-semibold">Vegetable</h2>
+            <h2 class="px-4 py-2 text-xl font-semibold">Rice & Noodle</h2>
             <div class="food-items">
                 <!-- Vegetable content -->
-
-                <% foodlists.forEach((food) => { %>
+                <% const foundedList = foodlists.filter((food) => food.food_category_id === 4) %>
+                <% foundedList.forEach((food) => { %>
                 <a href="/user/menu/<%= food.FoodID %>">
                     <div class="food-item">
-                        <div class="food-image"></div>
+                        <div class="food-image">
+                            <img src="<%= food.food_image_url %>" alt="<%= food.food_name %>">
+                        </div>
                         <div class="flex-grow">
                             <h3 class="font-semibold"><%= food.food_name %></h3>
                             <p class="text-gray-500">Mixed greens and vegetables</p>
