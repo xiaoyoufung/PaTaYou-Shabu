@@ -17,6 +17,7 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
         }
         .header {
             background-color: #B22222;
@@ -26,10 +27,10 @@
             border-top-right-radius: 20px;
         }
         .search-bar {
-            background-color: white;
+            background-color: #f5f5f5;
             border-radius: 20px;
             padding: 10px 15px;
-            margin: 10px 0;
+            margin: 10px 15px;
             display: flex;
             align-items: center;
         }
@@ -42,6 +43,8 @@
             padding: 5px 15px;
             border-radius: 15px;
             font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
         .active-filter {
             background-color: #B22222;
@@ -60,13 +63,21 @@
             border-radius: 10px;
             margin-right: 15px;
         }
+
+        .food-image img{
+            width: 100%;
+            height: 100%;
+            aspect-ratio: auto;
+        }
         .bottom-nav {
             background-color: #B22222;
             display: flex;
             justify-content: space-around;
             padding: 15px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 400px;
         }
         .nav-item {
             color: white;
@@ -74,9 +85,15 @@
             flex-direction: column;
             align-items: center;
         }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
     </style>
 </head>
-<body class="p-4">
+<body class="pb-16">
     <div class="app-container">
         <div class="header flex justify-between items-center">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,26 +108,91 @@
             <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-            <input type="text" placeholder="Search" class="w-full outline-none">
+            <input type="text" placeholder="Search" class="w-full outline-none bg-transparent">
         </div>
         
         <div class="category-filters">
-            <button class="filter-btn active-filter">All</button>
-            <button class="filter-btn">Meat</button>
-            <button class="filter-btn">Vegetable</button>
+            <button class="filter-btn active-filter" onclick="showCategory('all')">All</button>
+            <button class="filter-btn" onclick="showCategory('meat')">Meat</button>
+            <button class="filter-btn" onclick="showCategory('vegetable')">Vegetable</button>
         </div>
         
-        <h2 class="px-4 py-2 text-xl font-semibold">Meat</h2>
-        
-        <div class="food-items">
-            <div class="food-item">
-                <div class="food-image"></div>
-                <div class="flex-grow"></div>
-                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                </svg>
+        <div id="all-section" class="section active">
+            <h2 class="px-4 py-2 text-xl font-semibold">All Foods</h2>
+            <div class="food-items">
+                <!-- All foods content -->
+
+                <% foodlists.forEach((food) => { %>
+                    <a href="/user/menu/<%= food.FoodID %>">
+                        <div class="food-item">
+                            <div class="food-image">
+                                <img src="<%= food.food_image_url %>" alt="<%= food.food_name %>">
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-semibold"><%= food.food_name %></h3>
+                                <p class="text-gray-500">Mixed greens and vegetables</p>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                            </svg>
+                        </div>
+                        <a></a>
+                    <% })  %>
+    
+                <!-- Repeat for more items -->
             </div>
-            <!-- Repeat food-item div 4 more times -->
+        </div>
+
+        <div id="meat-section" class="section">
+            <h2 class="px-4 py-2 text-xl font-semibold">Meat</h2>
+            <div class="food-items">
+                <!-- Meat content -->
+                <% const meatList = foodlists.filter((food) => food.food_category_id === 7); %>
+
+                <% meatList.forEach((meat) => { %>
+                <a href="/user/menu/<%= meat.FoodID %>">
+                    <div class="food-item">
+                        <div class="food-image">
+                            <img src="<%= meat.food_image_url %>" alt="<%= meat.food_name %>">
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-semibold"><%= meat.food_name %></h3>
+                            <p class="text-gray-500">Mixed greens and vegetables</p>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </div>
+                </a>
+
+                <% })  %>
+
+                <!-- Repeat for more meat items -->
+            </div>
+        </div>
+
+        <div id="vegetable-section" class="section">
+            <h2 class="px-4 py-2 text-xl font-semibold">Vegetable</h2>
+            <div class="food-items">
+                <!-- Vegetable content -->
+
+                <% foodlists.forEach((food) => { %>
+                <a href="/user/menu/<%= food.FoodID %>">
+                    <div class="food-item">
+                        <div class="food-image"></div>
+                        <div class="flex-grow">
+                            <h3 class="font-semibold"><%= food.food_name %></h3>
+                            <p class="text-gray-500">Mixed greens and vegetables</p>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </div>
+                </a>
+                <% })  %>
+
+                <!-- Repeat for more vegetable items -->
+            </div>
         </div>
         
         <div class="bottom-nav">
@@ -136,5 +218,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function showCategory(category) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`${category}-section`).classList.add('active');
+            
+            // Update button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active-filter');
+            });
+            event.target.classList.add('active-filter');
+        }
+    </script>
 </body>
 </html>

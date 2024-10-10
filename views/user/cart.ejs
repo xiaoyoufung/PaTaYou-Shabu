@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink Order UI</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 390px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            height: 800px; /* Increased height */
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .close-btn {
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .item-description {
+            font-size: 14px;
+            color: #666;
+        }
+        .item-price {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            border: 1px solid #8B0000;
+            background-color: white;
+            color: #8B0000;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .quantity-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .quantity {
+            margin: 0 10px;
+        }
+        .footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .order-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="#" class="close-btn">×</a>
+            <div class="title">ตะกร้า</div>
+            <div></div> <!-- Empty div for flex spacing -->
+        </div>
+        <div class="content">
+            <div class="item">
+                <img src="/api/placeholder/60/60" alt="Cola" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">Cola</div>
+                    <div class="item-description">แก้ว</div>
+                </div>
+                <div class="item-price">฿60</div>
+                <div class="quantity-control">
+                    <a href="/reduce/<%= product.item.product_id %>">
+                        <button class="quantity-btn minus">-</button>
+                    </a>
+        
+                    <span class="quantity">2</span>
+
+                    <a href="/add/<%= product.item.product_id %>">
+                        <button class="quantity-btn plus">+</button>
+                    </a>
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="/api/placeholder/60/60" alt="Soda drink" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">Soda drink</div>
+                    <div class="item-description">เพิ่มส้ม : ไม่เพิ่มส้ม</div>
+                </div>
+                <div class="item-price">฿30</div>
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+            </div>
+            <!-- Additional items to make the UI taller -->
+            <div class="item">
+                <img src="/api/placeholder/60/60" alt="Orange Juice" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">Orange Juice</div>
+                    <div class="item-description">น้ำส้มคั้นสด</div>
+                </div>
+                <div class="item-price">฿45</div>
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="/api/placeholder/60/60" alt="Iced Tea" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">Iced Tea</div>
+                    <div class="item-description">ชาเย็น</div>
+                </div>
+                <div class="item-price">฿35</div>
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="total">
+                <span>รวมทั้งหมด</span>
+                <span id="total-price">฿150.00</span>
+            </div>
+            <button class="order-btn">สั่ง 3 รายการ</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.item');
+            const totalPriceElement = document.getElementById('total-price');
+            const orderButton = document.querySelector('.order-btn');
+
+            items.forEach(item => {
+                const minusBtn = item.querySelector('.minus');
+                const plusBtn = item.querySelector('.plus');
+                const quantityElement = item.querySelector('.quantity');
+                const priceElement = item.querySelector('.item-price');
+                const price = parseInt(priceElement.textContent.replace('฿', ''));
+
+                updateButtonState(minusBtn, parseInt(quantityElement.textContent));
+
+                minusBtn.addEventListener('click', () => updateQuantity(-1));
+                plusBtn.addEventListener('click', () => updateQuantity(1));
+
+                function updateQuantity(change) {
+                    let quantity = parseInt(quantityElement.textContent) + change;
+                    quantity = Math.max(0, quantity);
+                    quantityElement.textContent = quantity;
+                    updateButtonState(minusBtn, quantity);
+                    updateTotal();
+                }
+            });
+
+            function updateButtonState(button, quantity) {
+                button.disabled = quantity === 0;
+            }
+
+            function updateTotal() {
+                let total = 0;
+                let itemCount = 0;
+                items.forEach(item => {
+                    const quantity = parseInt(item.querySelector('.quantity').textContent);
+                    const price = parseInt(item.querySelector('.item-price').textContent.replace('฿', ''));
+                    total += quantity * price;
+                    itemCount += quantity;
+                });
+                totalPriceElement.textContent = `฿${total.toFixed(2)}`;
+                orderButton.textContent = `สั่ง ${itemCount} รายการ`;
+            }
+
+            updateTotal();
+        });
+    </script>
+</body>
+</html>
