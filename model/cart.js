@@ -47,8 +47,8 @@ module.exports = function Cart(oldCart) {
         if(!storeItem) {
             storeItem = this.items[id] = {item: item, qty: 0, price: 0};
         }
-        storeItem.qty = quantity;
-        storeItem.price = storeItem.item.price * storeItem.qty;
+        storeItem.qty = parseInt(quantity);
+        storeItem.price = storeItem.item.food_price * storeItem.qty;
         this.totalQty += storeItem.qty;
         this.totalPrice += storeItem.price;
     };

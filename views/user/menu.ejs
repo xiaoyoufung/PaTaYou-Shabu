@@ -69,7 +69,7 @@
             <h2 class="px-4 py-2 text-xl font-semibold">Meat</h2>
             <div class="food-items">
                 <!-- Meat content -->
-                <% const meatList = foodlists.filter((food) => food.food_category_id === 7); %>
+                <% const meatList = foodlists.filter((food) => food.food_category === "meat"); %>
 
                 <% meatList.forEach((meat) => { %>
                 <a href="/user/menu/<%= meat.FoodID %>">
@@ -97,7 +97,7 @@
             <h2 class="px-4 py-2 text-xl font-semibold">Rice & Noodle</h2>
             <div class="food-items">
                 <!-- Vegetable content -->
-                <% const foundedList = foodlists.filter((food) => food.food_category_id === 4) %>
+                <% const foundedList = foodlists.filter((food) => food.food_category === "noodle") %>
                 <% foundedList.forEach((food) => { %>
                 <a href="/user/menu/<%= food.FoodID %>">
                     <div class="food-item">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="flex-grow">
                             <h3 class="font-semibold"><%= softserve.food_name %></h3>
-                            <p class="text-gray-500">Delicious frozen dessert</p>
+                            <p class="text-gray-500"><%= softserve.food_description %></p>
                         </div>
                         <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
@@ -143,27 +143,22 @@
             </div>
         </div>
         
-        <div class="bottom-nav">
-            <div class="nav-item">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-            </div>
-            <div class="nav-item">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-            </div>
-            <div class="nav-item">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </div>
-            <div class="nav-item">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                </svg>
-            </div>
+        <div class="bottom-nav bg-white">
+            <% if(session.cart) { %>
+                <div class="flex justify-between w-96 text-white bg-red-700 p-3 rounded-lg">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                            <circle cx="176" cy="416" r="32" fill="currentColor" />
+                            <circle cx="400" cy="416" r="32" fill="currentColor" />
+                            <path fill="currentColor" d="M167.78 304h261.34l38.4-192H133.89l-8.47-48H32v32h66.58l48 272H432v-32H173.42z" />
+                        </svg>
+                        <p class="pl-2"><%= session.cart.totalQty %> item in cart</p>
+                    </div>
+                    <div>
+                        <p>฿<%= session.cart.totalPrice %></p>
+                    </div>
+                </div>
+            <% }  %>
         </div>
     </div>
 

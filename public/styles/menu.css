@@ -90,7 +90,7 @@ body {
     aspect-ratio: auto;
 }
 .bottom-nav {
-    background-color: #B22222;
+    background-color: #FFF;
     display: flex;
     justify-content: space-around;
     padding: 15px;

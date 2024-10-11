@@ -211,16 +211,20 @@
         <a href="/user/menu">
             <button class="close-btn">×</button>
         </a>
-        <img src="muffin-burger.jpg" alt="Muffin burger" class="product-image">
+        <img src="<%= food.food_image_url %>" alt="Muffin burger" class="product-image">
         <div class="product-info">
-            <h2 class="product-name">Muffin burger</h2>
-            <p class="product-price">฿90.00</p>
+            <h2 class="product-name"><%= food.food_name %></h2>
+            <p class="product-price">฿<%= food.food_price %></p>
             <p class="additional-info">ข้อความเพิ่มเติม (ถ้ามี)</p>
             <div class="quantity-control">
                 <button class="quantity-btn minus" onclick="updateQuantity(-1)">−</button>
                 <span id="quantity" class="quantity">1</span>
                 <button class="quantity-btn plus" onclick="updateQuantity(1)">+</button>
-                <button class="add-to-cart" onclick="addToCart()">เพิ่มลงตระกร้า ฿<span id="total-price">90</span></button>
+                <a href="/cart/add-to-cart/<%= food.FoodID %>/1<%=  %>">
+
+               
+                <button class="add-to-cart" type="submit" onsubmit="addToCart(foodID, qty)">Add to Cart ฿<span id="total-price"><%= food.food_price %></span></button>
+            </a>
             </div>
         </div>
     </div>
@@ -228,22 +232,23 @@
  
     <script>
         let quantity = 1;
-const basePrice = 90;
+        const basePrice = <%= food.food_price %>;
 
-function updateQuantity(change) {
-    quantity = Math.max(1, quantity + change);
-    document.getElementById('quantity').textContent = quantity;
-    updateTotalPrice();
-}
+        function updateQuantity(change) {
+            quantity = Math.max(1, quantity + change);
+            document.getElementById('quantity').textContent = quantity;
+            updateTotalPrice();
+        }
 
-function updateTotalPrice() {
-    const totalPrice = basePrice * quantity;
-    document.getElementById('total-price').textContent = totalPrice;
-}
+        function updateTotalPrice() {
+            const totalPrice = basePrice * quantity;
+            document.getElementById('total-price').textContent = totalPrice;
+        }
 
-function addToCart() {
-    alert(`Added ${quantity} Muffin burger(s) to cart. Total: ฿${basePrice * quantity}`);
-}
+        function addToCart(id, qty) {
+            window.location.href = `http://localhost:3200/add-to-cart/:${id}/:${qty}`;
+            alert(`Added ${quantity} <%= food.food_name %>(s) to cart. Total: ฿${basePrice * quantity}`);
+        }
     </script>
 </body>
 </html>

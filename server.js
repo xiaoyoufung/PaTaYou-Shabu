@@ -33,7 +33,7 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 app.get("/", async (req, res) => {
-    res.render("login");
+    res.redirect("/user/menu");
 });
 
 app.use('/user', userRoutes);
