@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      background-color: #fff;
+    }
+    .left-section {
+      width: 300px;
+      border-right: 1px solid #eee;
+    }
+    .right-section {
+      flex-grow: 1;
+    }
+    .header {
+      background-color: #4DD0E1;
+      color: white;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-button, .cart-icon, .menu-icon {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+    }
+    .cart-badge {
+      background-color: #FF5252;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      position: absolute;
+    }
+    .filter-section {
+      padding: 16px;
+    }
+    .filter-dropdown {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .search-box {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+    .order-list {
+      padding: 16px;
+    }
+    .order-item {
+      padding: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .order-item.active {
+      background-color: #E3F2FD;
+      border-color: #2196F3;
+    }
+    .delivery-tag {
+      display: inline-block;
+      padding: 4px 8px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .toggle-section {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .toggle-switch {
+      width: 48px;
+      height: 24px;
+      background-color: #4CAF50;
+      border-radius: 12px;
+      position: relative;
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      top: 2px;
+      right: 2px;
+    }
+    .status-tabs {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+    }
+    .status-tab {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background-color: #f5f5f5;
+    }
+    .status-tab.active {
+      background-color: #E0F7FA;
+      color: #00BCD4;
+    }
+    .delivery-info {
+      padding: 16px;
+      background-color: #f9f9f9;
+    }
+    .delivery-type {
+      color: #4CAF50;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .delivery-type::before {
+      content: 'M';
+      background-color: #4CAF50;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+    }
+    .menu-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      margin-right: 16px;
+    }
+    .menu-details {
+      flex-grow: 1;
+    }
+    .menu-price {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .total-section {
+      padding: 16px;
+      border-top: 1px solid #eee;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+    }
+    .cancel-button, .accept-button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 4px;
+      border: none;
+      font-weight: bold;
+    }
+    .cancel-button {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    .accept-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="left-section">
+      <div class="filter-section">
+        <select class="filter-dropdown">
+          <option>ทั้งหมด (1)</option>
+        </select>
+        <input type="search" class="search-box" placeholder="🔍 Search">
+      </div>
+      <div class="order-list">
+        <div class="order-item active">
+          <div class="delivery-tag">เดลิเวอรี่</div>
+          <h3>ID3321</h3>
+          <p>Frederick</p>
+          <div style="display: flex; justify-content: space-between;">
+            <span>489.00</span>
+            <span style="color: orange;">รอการชำระ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <header class="header">
+        <button class="back-button">←</button>
+        <h1>ออเดอร์</h1>
+        <div>
+          <button class="cart-icon">🛒</button>
+          <span class="cart-badge">1</span>
+          <button class="menu-icon">⚙️</button>
+        </div>
+      </header>
+
+      <div class="toggle-section">
+        <span>เปิดรับออเดอร์ ( จนถึงเวลา 18:00 )</span>
+        <div class="toggle-switch"></div>
+      </div>
+
+      <div class="status-tabs">
+        <div class="status-tab active">รออาหาร 1</div>
+        <div class="status-tab">กำลังดำเนินการ 1</div>
+        <div class="status-tab">พร้อมส่ง 0</div>
+        <div class="status-tab">เสร็จ 9</div>
+      </div>
+
+      <div class="delivery-info">
+        <h3>รหัสใบสั่งซื้อ 19/2/2018 12:31</h3>
+        <p>ลูกค้า: Frederick</p>
+        <p>ที่อยู่: 15/555 เศรษฐสิริจัตุพงษ์ ปากเกร็ด นนทบุรี</p>
+      </div>
+
+      <div class="delivery-type">เดลิเวอรี่</div>
+
+      <div class="menu-items">
+        <div class="menu-item">
+          <img src="/api/placeholder/60/60" alt="Yakisoba" class="menu-image">
+          <div class="menu-details">
+            <h4>1x Yakisoba</h4>
+            <p>Meat • Pork x1</p>
+          </div>
+          <span class="menu-price">160฿</span>
+        </div>
+        <div class="menu-item">
+          <img src="/api/placeholder/60/60" alt="Fried Rice" class="menu-image">
+          <div class="menu-details">
+            <h4>1x Fried Rice</h4>
+          </div>
+          <span class="menu-price">160฿</span>
+        </div>
+        <div class="menu-item">
+          <img src="/api/placeholder/60/60" alt="Noodle with Pork" class="menu-image">
+          <div class="menu-details">
+            <h4>1x Noodle with Pork</h4>
+            <p>Meat • Pork x1</p>
+          </div>
+          <span class="menu-price">160฿</span>
+        </div>
+      </div>
+
+      <div class="total-section">
+        <div class="total-row">
+          <span>รวม (3 รายการ):</span>
+          <span>459฿</span>
+        </div>
+        <div class="total-row">
+          <span>ค่าบริการ:</span>
+          <span>-</span>
+        </div>
+        <div class="total-row">
+          <span>ค่าส่ง:</span>
+          <span>30฿</span>
+        </div>
+        <div class="total-row">
+          <span>ภาษี:</span>
+          <span>-</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="cancel-button">ยกเลิกออเดอร์</button>
+        <button class="accept-button">รับออเดอร์</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

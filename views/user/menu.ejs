@@ -36,7 +36,7 @@
             <button class="filter-btn active-filter" onclick="showCategory('all')">All</button>
             <button class="filter-btn" onclick="showCategory('meat')">Meat</button>
             <button class="filter-btn" onclick="showCategory('vegetable')">Rice & Noodle</button>
-            <button class="filter-btn" onclick="showCategory('softserve')">Soft Serve</button>
+            <button class="filter-btn" onclick="showCategory('softserve')">Soft Cream</button>
         </div>
         
         <div id="all-section" class="section active">
@@ -120,9 +120,9 @@
         </div>
 
         <div id="softserve-section" class="section">
-            <h2 class="px-4 py-2 text-xl font-semibold">Soft Serve</h2>
+            <h2 class="px-4 py-2 text-xl font-semibold">Soft Cream</h2>
             <div class="food-items">
-                <% const softserveList = foodlists.filter((food) => food.food_category_id === 6); %>
+                <% const softserveList = foodlists.filter((food) => food.food_category === "dessert"); %>
 
                 <% softserveList.forEach((softserve) => { %>
                 <a href="/user/menu/<%= softserve.FoodID %>">
@@ -145,19 +145,21 @@
         
         <div class="bottom-nav bg-white">
             <% if(session.cart) { %>
-                <div class="flex justify-between w-96 text-white bg-red-700 p-3 rounded-lg">
-                    <div class="flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                            <circle cx="176" cy="416" r="32" fill="currentColor" />
-                            <circle cx="400" cy="416" r="32" fill="currentColor" />
-                            <path fill="currentColor" d="M167.78 304h261.34l38.4-192H133.89l-8.47-48H32v32h66.58l48 272H432v-32H173.42z" />
-                        </svg>
-                        <p class="pl-2"><%= session.cart.totalQty %> item in cart</p>
+                <a href="/cart">
+                    <div class="flex justify-between w-96 text-white bg-red-700 p-3 rounded-lg">
+                        <div class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                                <circle cx="176" cy="416" r="32" fill="currentColor" />
+                                <circle cx="400" cy="416" r="32" fill="currentColor" />
+                                <path fill="currentColor" d="M167.78 304h261.34l38.4-192H133.89l-8.47-48H32v32h66.58l48 272H432v-32H173.42z" />
+                            </svg>
+                            <p class="pl-2"><%= session.cart.totalQty %> item in cart</p>
+                        </div>
+                        <div>
+                            <p>฿<%= session.cart.totalPrice %></p>
+                        </div>
                     </div>
-                    <div>
-                        <p>฿<%= session.cart.totalPrice %></p>
-                    </div>
-                </div>
+                </a>
             <% }  %>
         </div>
     </div>

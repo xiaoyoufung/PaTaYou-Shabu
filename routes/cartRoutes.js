@@ -11,8 +11,9 @@ router.get("/", function (req, res, next) {
     }
     let cart = new Cart(req.session.cart);
     //console.log(cart)
+    console.log(cart.generateArray);
     res.render("user/cart", {
-      products: cart.generateArray(),
+      foods: cart.generateArray(),
       totalPrice: cart.totalPrice,
     });
   });
@@ -35,11 +36,14 @@ router.get('/add-to-cart/:id', async function(req, res) {
   });
 
 router.get('/add-to-cart/:id/:qty', async (req, res) => {
-  let foodId = req.params.id;
-  let foodQty = req.params.qty;
+  let foodId = parseInt(req.params.id);
+  let foodQty = parseInt(req.params.qty);
+
+  console.log(foodId, foodQty);
+  
   let cart = new Cart(req.session.cart ? req.session.cart : {});
   const food = await listFood.findAllByKey("FoodID", foodId);
-
+console.log(food);
   if(!food) {
     return res.redirect('/');
   } else {

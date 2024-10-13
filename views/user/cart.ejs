@@ -73,9 +73,9 @@
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            border: 1px solid #D4A762;
+            border: 1px solid #B22222;
             background: white;
-            color: #D4A762;
+            color: #B22222;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -100,7 +100,7 @@
             margin-bottom: 10px;
         }
         .order-btn {
-            background: #D4A762;
+            background: #B22222;
             color: white;
             width: 100%;
             padding: 12px;
@@ -113,62 +113,55 @@
 <body>
     <div class="app-container">
         <div class="header">
-            <span class="close-btn">×</span>
-            <h1 class="page-title">ตะกร้า</h1>
+            <a href="/user/menu">
+                <span class="close-btn">×</span>
+            </a>
+            <h1 class="page-title">Cart</h1>
             <span></span> <!-- Empty span for flex alignment -->
         </div>
         
         <div class="menu-list">
-            <% if(products != undefined) { %>
+            <% if(foods != undefined) { %>
 
-                <% if(products.length == 0) { %>
+                <% if(foods.length == 0) { %>
                     <div class="col empty"><h1>Cart is empty...</h1><button class="btn" onclick="window.history.go(-1);">Go back to shopping</button></div>
                 <% } else { %>
-                    <div class="menu-item">
-                        <div class="item-left">
-                            <img src="/api/placeholder/60/60" alt="Cola" class="item-image">
-                            <div class="item-details">
-                                <h3>Cola</h3>
-                                <p>แก้ไข</p>
+                    <% foods.forEach((food) => { %>
+                        <div class="menu-item">
+                            <div class="item-left">
+                                <img src="<%= food.item.food_image_url %>" alt="Cola" class="item-image">
+                                <div class="item-details">
+                                    <h3><%= food.item.food_name %></h3>
+                                    <p>แก้ไข</p>
+                                </div>
+                            </div>
+                            <div class="item-right">
+                                <span class="price">฿ <%= food.price %></span>
+                                <div class="quantity-control">
+                                    <a href="/cart/reduce/<%= food.item.FoodID %> ">
+                                        <button class="quantity-btn">-</button>
+                                    </a>
+                                    <span class="quantity"><%= food.qty %></span>
+                                    <% console.log(food.item.FoodID) %>
+                                    <a href="/cart/add/<%= food.item.FoodID %>">
+                                        <button class="quantity-btn">+</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="item-right">
-                            <span class="price">฿60</span>
-                            <div class="quantity-control">
-                                <button class="quantity-btn">-</button>
-                                <span class="quantity">2</span>
-                                <button class="quantity-btn">+</button>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="menu-item">
-                        <div class="item-left">
-                            <img src="/api/placeholder/60/60" alt="Soda drink" class="item-image">
-                            <div class="item-details">
-                                <h3>Soda drink</h3>
-                                <p>เพิ่มเติม : ไม่ใส่น้ำแข็ง</p>
-                            </div>
-                        </div>
-                        <div class="item-right">
-                            <span class="price">฿30</span>
-                            <div class="quantity-control">
-                                <button class="quantity-btn minus" onclick="updateQuantity(2, -1)">-</button>
-                                <span class="quantity">1</span>
-                                <button class="quantity-btn plus" onclick="updateQuantity(2, 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
+                    <% }) %>
                 <% } %>
             <% } %>
         </div>
 
         <div class="bottom-bar">
             <div class="total">
-                <span>รวมทั้งหมด</span>
-                <span>฿90.00</span>
+                <span>Total amout</span>
+                <span>฿<%= session.cart.totalPrice %>.00</span>
             </div>
-            <button class="order-btn">สั่ง 3 รายการ</button>
+            <a href="/submit-order">
+                <button class="order-btn">Order <%= session.cart.totalQty %> item</button>
+            </a>
         </div>
     </div>
 

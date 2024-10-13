@@ -114,6 +114,34 @@ class BaseSQLModel {
     const results = await this.executeQuery(query);
     return results;
   }
+
+  async findByOrderdetail(){
+    const query =  `SELECT o.OrderID, o.CustomerID, c.customer_name, o.FoodID, f.food_name, f.food_price, o.order_quantity FROM orderdetail o JOIN customer c ON o.CustomerID = c.CustomerID JOIN food f ON o.FoodID = f.FoodID ORDER BY o.OrderID`;
+    const results = await this.executeQuery(query);
+    return results;
+  }
+
+  async createMultipleOrders(orders) {
+    if (!Array.isArray(orders) || orders.length === 0) {
+      throw new Error('Input must be a non-empty array of order objects');
+    }
+  
+    const columns = ['OrderID', 'CustomerID', 'FoodID', 'order_quantity'];
+    const placeholders = orders.map(() => `(?, ?, ?, ?)`).join(',');
+    
+    const query = `INSERT INTO ${this.tableName} (${columns.join(',')}) VALUES ${placeholders}`;
+    
+    const values = orders.flatMap(order => [
+      order.OrderID,
+      order.CustomerID,
+      order.FoodID,
+      order.order_quantity
+    ]);
+  
+    const result = await this.executeQuery(query, values);
+    return result.insertId;
+  }
+
 }
 
 

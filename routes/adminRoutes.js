@@ -2,8 +2,16 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.render("admin/admin.ejs");
+const listFood = require("../model/listFood");
+
+
+
+router.get("/", async (req, res) => {
+    const getOrder = await listFood.findByOrderdetail();
+    console.log(getOrder);
+    res.render("admin/admin-table.ejs", {
+        orderDetail: getOrder,
+    });
 });
 
 router.get("/report", (req, res) => {
